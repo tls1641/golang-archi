@@ -1,43 +1,35 @@
 package architecture
 
 import (
-	"fmt"
 	"testing"
+
+	"github.com/golang/mock/gomock"
 )
 
-type DB map[int]Person
-
-func (m DB) Save(n int, p Person) {
-	m[n] = p
-}
-
-func (m DB) Retrieve(n int) Person {
-	return m[n]
-}
-
 func Test_Put(t *testing.T) {
-	mdb := DB{}
+	ctl := gomock.NewController(t)
+	acc := NewMockAccessor(ctl)
+
 	p := Person{
 		First: "James",
 	}
 
-	Put(mdb, 1, p)
+	acc.EXPECT().Save(1, p).MinTimes(1).MaxTimes(1)
 
-	got := mdb.Retrieve(1)
-	if got != p {
-		t.Fatalf("want %v, got %v", p, got)
-	}
+	Put(acc, 1, p)
+
+	ctl.Finish()
 }
 
-func ExamplePut() {
-	mdb := DB{}
-	p := Person{
-		First: "James",
-	}
+// func ExamplePut() {
+// 	mdb := DB{}
+// 	p := Person{
+// 		First: "James",
+// 	}
 
-	Put(mdb, 1, p)
-	got := mdb.Retrieve(1)
-	fmt.Println(got)
-	//Output: {James}
+// 	Put(mdb, 1, p)
+// 	got := mdb.Retrieve(1)
+// 	fmt.Println(got)
+// 	//Output: {James}
 
-}
+// }

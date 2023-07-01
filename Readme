@@ -1,0 +1,3 @@
+how to use mockgen
+
+mockgen -source service.go -destination mock_test.go -package architecture -self_package github.com/tls1641/golang-archi
