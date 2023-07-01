@@ -1,6 +1,6 @@
 package postgres
 
-import "github.com/tls1641/architecture"
+import architecture "github.com/tls1641/golang-archi"
 
 type DB map[int]architecture.Person
 

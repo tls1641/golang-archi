@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/tls1641/architecture"
-	"github.com/tls1641/architecture/storage/mongo"
-	"github.com/tls1641/architecture/storage/postgres"
+	architecture "github.com/tls1641/golang-archi"
+	"github.com/tls1641/golang-archi/storage/mongo"
+	"github.com/tls1641/golang-archi/storage/postgres"
 )
 
 func main() {
